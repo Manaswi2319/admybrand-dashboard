@@ -92,7 +92,8 @@ def export_csv(n_clicks, start_date, end_date):
     filtered_df = df[(df["Date"] >= pd.to_datetime(start_date)) & (df["Date"] <= pd.to_datetime(end_date))]
     return dcc.send_data_frame(filtered_df.to_csv, filename="dashboard_export.csv")
 
-# Run app
-if __name__ == '__main__':
-    app.run(debug=True)
+import os
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8050))
+    app.run(debug=True, host="0.0.0.0", port=port)
